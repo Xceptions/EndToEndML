@@ -3,7 +3,8 @@ import requests
 
 def test_predict():
     '''Testing the predict api with random data'''
-    url = "http://127.0.0.1:5000/predict"
+    # url = "http://127.0.0.1:5000/predict" # during dev
+    url = "http://localhost:8081/predict" # from k8s
     headers = {"Content-Type": "application/json"}
     payload = [5.1, 3.5, 1.4, 0.2]
 
