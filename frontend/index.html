@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Iris Frontend</title>
+</head>
+<body>
+    <h1>Iris Frontend</h1>
+    <div>Iris-Setosa: 0 Iris-Versicolor: 1 Iris-Virginica: 2</div><br><br>
+
+    <input type="text" id="sepalLength" placeholder="Enter sepal length"><br><br>
+    <input type="text" id="sepalWidth" placeholder="Enter sepal width"><br><br>
+    <input type="text" id="petalLength" placeholder="Enter petal length"><br><br>
+    <input type="text" id="petalWidth" placeholder="Enter petal width"><br><br>
+    <button id="sendBtn">Submit Request</button>
+
+    <!-- Container to show the result -->
+    <div id="result"></div>
+    <script>
+        const button = document.getElementById('sendBtn');
+        
+        button.addEventListener('click', async () => {
+    
+            const sepalLength = document.getElementById('sepalLength').value;
+            const sepalWidth = document.getElementById('sepalWidth').value;
+            const petalLength = document.getElementById('petalLength').value;
+            const petalWidth = document.getElementById('petalWidth').value;
+
+            const features = [sepalLength, sepalWidth, petalLength, petalWidth];
+
+            try {
+                const response = await fetch('http://127.0.0.1:5000/predict', {
+                    method: 'POST', 
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(features)
+                });
+                const resultData = await response.json();
+                console.log('Success:', resultData);
+                document.getElementById('result').textContent = JSON.stringify(resultData, null, 2);
+                
+            } catch (error) {
+                console.error('Error:', error);
+            }
+
+        });
+    </script>
+
+</body>
+</html>
