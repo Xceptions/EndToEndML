@@ -1,0 +1,19 @@
+FROM python:3.9-slim
+
+# Setting the working directory in the container
+WORKDIR /app
+
+# requirements file and installing dependencies
+COPY requirements.txt .
+
+RUN pip3 install --no-cache-dir --upgrade pip setuptools wheel
+
+RUN pip3 install --no-cache-dir -r requirements.txt
+
+# Copying the rest of the application code
+COPY . .
+
+# exposing port 5000
+EXPOSE 5000
+
+CMD ["python3", "app.py"]
