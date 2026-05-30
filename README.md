@@ -4,10 +4,10 @@ To run
 
 1. Because we are using two distinct ports (one for the site layout, one for API calls), we must tell k3d to map both external ports when creating the cluster. Build both images locally:
 
-'''bash
+```bash
    docker build -t my-flask-backend:latest ./backend
    docker build -t my-html-frontend:latest ./frontend
-'''
+```
 
 Create the K3d Cluster exposing two ports:
 Port 8080 maps to the frontend service (Nginx).
